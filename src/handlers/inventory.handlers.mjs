@@ -15,11 +15,11 @@ export const createInventoryRecord = async (req, res) => {
   try {
     const { productName, supplier, SKU, lowStockStatus } = req.body;
 
-    if (!productName || !SKU || !lowStockStatus) {
+    if (!productName || supplier || !SKU || !lowStockStatus) {
       res.status(400).json({ message: "All fields must be provided" });
     }
 
-    await Inventory.create({ productName, SKU, lowStockStatus });
+    await Inventory.create({ productName, supplier, SKU, lowStockStatus });
     res.status(201).json({ message: "Inventory record created" });
   } catch (error) {
     console.log(error);
